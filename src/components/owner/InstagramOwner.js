@@ -1,6 +1,5 @@
 import React, { useContext, Fragment, useEffect } from "react";
 import InstagramContext from "../../context/Instagram/InstagramContext";
-import Preloader from "../layout/Preloader";
 import styled from "styled-components";
 
 const InstagramOwner = () => {
@@ -9,11 +8,10 @@ const InstagramOwner = () => {
 
   useEffect(() => {
     getSelf();
-
     // eslint-disable-next-line
   }, []);
 
-  const { username, full_name, profile_picture, website } = self;
+  const { username, full_name, profile_picture } = self;
   //get the nested value inside the counts object
   const { counts = {} } = self;
 
@@ -34,20 +32,21 @@ const InstagramOwner = () => {
             <div className='col s8'>
               <Padding>
                 <h5>{full_name}</h5>
+                <p>https://www.behance.net/alaindimabuyo</p>
               </Padding>
             </div>
           </div>
           <div className='row'>
             <div className='col s4 badge-primary'>
               <span className=''>
-                <h6>Posts:{counts.media}</h6>
+                <h6>Posts: {counts.media}</h6>
               </span>
             </div>
             <div className='col s4 badge-danger'>
-              <h6>Followers:{counts.follows}</h6>
+              <h6>Followers: {counts.followed_by}</h6>
             </div>
             <div className='col s4 badge-dark'>
-              <h6>Following:{counts.followed_by}</h6>
+              <h6>Following: {counts.follows}</h6>
             </div>
           </div>
         </div>

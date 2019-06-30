@@ -1,4 +1,4 @@
-import { GET_COMMENTS, GET_PHOTO, SET_LOADING, GET_SELF, GET_COUNTS } from "../types";
+import { GET_COMMENTS, GET_PHOTO, SET_LOADING, GET_SELF } from "../types";
 
 export default (state, action) => {
   switch (action.type) {
@@ -8,18 +8,19 @@ export default (state, action) => {
         self: action.payload,
         loading: false
       };
+    case GET_PHOTO:
+      return {
+        ...state,
+        photos: action.payload,
+        loading: false
+      };
 
     case SET_LOADING:
       return {
         ...state,
         loading: true
       };
-    case GET_PHOTO:
-      return {
-        ...state,
-        photo: action.payload,
-        loading: false
-      };
+
     case GET_COMMENTS:
       return {
         ...state,

@@ -5,9 +5,9 @@ import styled from "styled-components";
 const Navbar = ({ icon, title }) => {
   return (
     <nav className='navbar bg-success'>
-      <a href='#!'>
+      <Link to='/'>
         <i className={icon} />
-      </a>
+      </Link>
       <ul>
         <LiWrapper>
           <Link to='/'>Home</Link>
@@ -24,7 +24,7 @@ const Navbar = ({ icon, title }) => {
 };
 //variables for navbar
 Navbar.defaultProps = {
-  icon: "fab fa-instagram fa-3x p-1",
+  icon: "fab fa-instagram fa-3x p-2",
   title: "Instagram"
 };
 

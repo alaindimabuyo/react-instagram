@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import InstagramContext from "./InstagramContext";
 import InstagramReducer from "./InstagramReducer";
-import { GET_COMMENTS, GET_PHOTO, SET_LOADING, GET_SELF, GET_COUNTS } from "../types";
+import { GET_COMMENTS, GET_PHOTO, SET_LOADING, GET_SELF } from "../types";
 import axios from "axios";
 
 //accessToken
@@ -41,7 +41,7 @@ const InstagramState = props => {
       `https://api.instagram.com/v1/users/self/media/recent/?access_token=572689804.f6c0c6a.7450f1a2df6441d08642f355e12b1981`
     );
 
-    dispatch({ type: GET_PHOTO, payload: res.data });
+    dispatch({ type: GET_PHOTO, payload: res.data.data });
   };
 
   //   //get Comments
@@ -62,6 +62,7 @@ const InstagramState = props => {
         photo: state.photo,
         comments: state.comments,
         loading: state.loading,
+
         getSelf,
         getPhoto,
         getComments
