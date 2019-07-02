@@ -6,6 +6,8 @@ Instagram Showcase
 
 React <br>
 axios <br>
-jquery <br>
+swiper <br>
 styled-components <br>
 font-awesome <br>
+react-reveal <br>
+instagram Api <br>

@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+import InstagramContext from "../../context/Instagram/InstagramContext";
 const Navbar = ({ icon, title }) => {
+  const igContext = useContext(InstagramContext);
+
+  const { clearState } = igContext;
+  useEffect(() => {
+    clearState();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <nav className='navbar bg-success'>
       <Link to='/'>
-        <i className={icon} />
+        <i onClick={clearState} className={icon} />
       </Link>
       <ul>
         <LiWrapper>
-          <Link to='/'>Home</Link>
-        </LiWrapper>
-        <LiWrapper>
-          <Link to='/comments'>Comments</Link>
-        </LiWrapper>
-        <LiWrapper>
-          <Link to='/About'>About</Link>
+          <Link to='/' onClick={clearState}>
+            Home
+          </Link>
         </LiWrapper>
       </ul>
     </nav>

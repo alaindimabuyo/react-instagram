@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 import InstagramContext from "../../context/Instagram/InstagramContext";
 import styled from "styled-components";
 import SlideImages from "../layout/Carousel";
+import Prealoader from "../layout/Preloader";
 
 const CurrentPhoto = ({ match }) => {
   const igContext = useContext(InstagramContext);
 
-  const { photo, getCurrentPhoto, flatten } = igContext;
+  const { photo, getCurrentPhoto, flatten, clearState, loading } = igContext;
   useEffect(() => {
     getCurrentPhoto(match.params.id);
+    clearState();
     // eslint-disable-next-line
   }, []);
 
@@ -19,68 +21,83 @@ const CurrentPhoto = ({ match }) => {
   let carousel = flatten(photo.carousel_media);
   let location = flatten(photo.location);
   console.log(<location />);
-
-  return (
-    <Padding>
-      <Fragment>
-        <div className='container'>
-          <div className='row'>
-            {photo.caption !== null ? (
-              <Fragment>
-                <div className='col s1'>
-                  <p />
-                </div>
-                <div className='col s1'>
-                  <Link to='/'>
-                    <SmallImageWrap src={user.x_profile_picture} alt='profile_photo' />
-                  </Link>
-                </div>
-                <div className='col s10'>
-                  <Link to='/'>
-                    <strong>{user.x_username}</strong>
-                  </Link>
-                  <Caption>{caption.x_text}</Caption>
-                </div>
-              </Fragment>
-            ) : (
-              <div className='row'>
-                <div className='col s1'>
-                  <p />
-                </div>
-                <div className='col s1'>
-                  <Link to='/'>
-                    <SmallImageWrap src={user.x_profile_picture} alt='profile_photo' />
-                  </Link>
-                </div>
-                <div className='col s10'>
-                  <Link to='/'>
-                    <strong>{user.x_username}</strong>
-                  </Link>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className='row'>
-            <div className='col s3' />
-            <div className='col s5 '>
-              {location !== null ? (
-                <strong className='badge-primary right badge'>{location.x_name}</strong>
+  if (loading) {
+    return <Prealoader />;
+  } else {
+    return (
+      <Padding>
+        <Fragment>
+          <div className='container'>
+            <div className='row'>
+              {photo.caption !== null ? (
+                <Fragment>
+                  <div className='col s1'>
+                    <p />
+                  </div>
+                  <div className='col s1'>
+                    <Link to='/'>
+                      <SmallImageWrap
+                        src={user.x_profile_picture}
+                        alt='profile_photo'
+                        onClick={clearState}
+                      />
+                    </Link>
+                  </div>
+                  <div className='col s10'>
+                    <Link to='/'>
+                      <strong onClick={clearState} className='badge-primary badge'>
+                        {user.x_username}
+                      </strong>
+                    </Link>
+                    <Caption>{caption.x_text}</Caption>
+                  </div>
+                </Fragment>
               ) : (
-                <strong className='badge-primary right badge' />
-              )}
-
-              {photo.type === "carousel" ? (
-                <SlideImages carousel={carousel} />
-              ) : (
-                <ImageWrap src={image.x_standard_resolution_url} alt='current_photo' />
+                <div className='row'>
+                  <div className='col s1'>
+                    <p />
+                  </div>
+                  <div className='col s1'>
+                    <Link to='/'>
+                      <SmallImageWrap
+                        onClick={clearState}
+                        src={user.x_profile_picture}
+                        alt='profile_photo'
+                      />
+                    </Link>
+                  </div>
+                  <div className='col s10'>
+                    <Link to='/'>
+                      <strong onClick={clearState} className='badge-primary badge'>
+                        {user.x_username}
+                      </strong>
+                    </Link>
+                  </div>
+                </div>
               )}
             </div>
-            <div className='col-s2' />
+            <div className='row'>
+              <div className='col s3' />
+              <div className='col s5 '>
+                {location !== null ? (
+                  <strong className='right bold-text'>{location.x_name}</strong>
+                ) : (
+                  <strong className='badge-primary right badge' />
+                )}
+
+                {photo.type === "carousel" ? (
+                  <SlideImages carousel={carousel} />
+                ) : (
+                  <ImageWrap src={image.x_standard_resolution_url} alt='current_photo' />
+                )}
+              </div>
+              <div className='col-s2' />
+            </div>
           </div>
-        </div>
-      </Fragment>
-    </Padding>
-  );
+        </Fragment>
+      </Padding>
+    );
+  }
 };
 
 const SmallImageWrap = styled.img`

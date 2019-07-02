@@ -217,7 +217,7 @@ img {
   font-size: 0.8rem;
   padding: 0.2rem 0.7rem;
   text-align: center;
-  margin: 0.3rem;
+
   background: var(--light-color);
   color: #333;
   border-radius: 5px;
@@ -522,4 +522,12 @@ table th {
 
 .swiper-button-next .swiper-slide {
   color: white !important;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.color-white {
+  color: #fff;
 }

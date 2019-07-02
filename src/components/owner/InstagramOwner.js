@@ -63,10 +63,6 @@ display:block
 const ImgContainer = styled.div`
   position: relative;
   width: 100%;
-  &:hover .overlay {
-    opacity: 1;
-    border-radius: 50%;
-  }
 `;
 
 const Overlay = styled.div`

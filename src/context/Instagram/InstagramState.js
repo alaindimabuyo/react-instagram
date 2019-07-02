@@ -1,11 +1,13 @@
 import React, { useReducer } from "react";
 import InstagramContext from "./InstagramContext";
 import InstagramReducer from "./InstagramReducer";
-import { GET_COMMENTS, GET_PHOTO, SET_LOADING, GET_SELF, GET_CURRENT_PHOTO } from "../types";
+import { GET_PHOTO, SET_LOADING, GET_SELF, GET_CURRENT_PHOTO, CLEAR_STATE } from "../types";
 import axios from "axios";
 
 //accessToken
-let igToken = "572689804.f6c0c6a.7450f1a2df6441d08642f355e12b1981";
+
+let igToken = process.env.REACT_APP_INSTAGRAM_ACCESS_TOKEN;
+
 const InstagramState = props => {
   const initialState = {
     photo: {},
@@ -21,6 +23,10 @@ const InstagramState = props => {
   //   //set loading
   const setLoading = () => {
     dispatch({ type: SET_LOADING });
+  };
+
+  const clearState = () => {
+    dispatch({ type: CLEAR_STATE });
   };
 
   //   //INSTAGRAM API ENDPOINTS
@@ -81,7 +87,7 @@ const InstagramState = props => {
         getCurrentPhoto,
         getSelf,
         getPhoto,
-
+        clearState,
         flatten,
         getValue
       }}
