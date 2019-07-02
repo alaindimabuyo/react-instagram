@@ -5,7 +5,7 @@ import { GET_PHOTO, SET_LOADING, GET_SELF, GET_CURRENT_PHOTO, CLEAR_STATE } from
 import axios from "axios";
 
 //accessToken
-let igToken = process.env.REACT_APP_INSTAGRAM_ACCESS_TOKEN;
+let igToken = "572689804.f6c0c6a.7450f1a2df6441d08642f355e12b1981";
 
 const InstagramState = props => {
   const initialState = {
