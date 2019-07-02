@@ -6,7 +6,7 @@ import Navbar from "./components/layout/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import InstagramState from "./context/Instagram/InstagramState";
 import Home from "./components/pages/Home";
-
+import CurrentPhoto from "./components/Photos/CurrentPhoto";
 import "./App.css";
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path='/' component={Home} />
+            <Route exact path='/photo/:id' component={CurrentPhoto} />
           </Switch>
         </div>
       </Router>

@@ -6,5 +6,6 @@ Instagram Showcase
 
 React <br>
 axios <br>
-materialize-css <br>
+jquery <br>
 styled-components <br>
+font-awesome <br>

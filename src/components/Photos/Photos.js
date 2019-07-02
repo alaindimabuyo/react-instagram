@@ -1,10 +1,10 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import InstagramContext from "../../context/Instagram/InstagramContext";
 import PhotoItem from "../Photos/PhotoItems";
-
+import Preloader from "../layout/Preloader";
 const Photos = () => {
   const igContext = useContext(InstagramContext);
-  const { photos, getPhoto } = igContext;
+  const { photos, getPhoto, loading } = igContext;
 
   useEffect(() => {
     getPhoto();

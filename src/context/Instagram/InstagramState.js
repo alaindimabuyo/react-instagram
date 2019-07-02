@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import InstagramContext from "./InstagramContext";
 import InstagramReducer from "./InstagramReducer";
-import { GET_COMMENTS, GET_PHOTO, SET_LOADING, GET_SELF } from "../types";
+import { GET_COMMENTS, GET_PHOTO, SET_LOADING, GET_SELF, GET_CURRENT_PHOTO } from "../types";
 import axios from "axios";
 
 //accessToken
@@ -27,9 +27,7 @@ const InstagramState = props => {
   //   //get Owner
   const getSelf = async () => {
     setLoading();
-    const res = await axios.get(
-      `https://api.instagram.com/v1/users/self/?access_token=572689804.f6c0c6a.7450f1a2df6441d08642f355e12b1981`
-    );
+    const res = await axios.get(`https://api.instagram.com/v1/users/self/?access_token=${igToken}`);
 
     dispatch({ type: GET_SELF, payload: res.data.data });
   };
@@ -38,20 +36,38 @@ const InstagramState = props => {
   const getPhoto = async () => {
     setLoading();
     const res = await axios.get(
-      `https://api.instagram.com/v1/users/self/media/recent/?access_token=572689804.f6c0c6a.7450f1a2df6441d08642f355e12b1981`
+      `https://api.instagram.com/v1/users/self/media/recent/?access_token=${igToken}`
     );
 
     dispatch({ type: GET_PHOTO, payload: res.data.data });
   };
-
-  //   //get Comments
-  const getComments = async mediaId => {
+  const getCurrentPhoto = async id => {
     setLoading();
-    const res = await axios.get(
-      `https://api.instagram.com/v1/media/${mediaId}/comments?access_token=${igToken}`
-    );
+    const res = await axios.get(`https://api.instagram.com/v1/media/${id}?access_token=${igToken}`);
 
-    dispatch({ type: GET_COMMENTS, payload: res.data });
+    dispatch({ type: GET_CURRENT_PHOTO, payload: res.data.data });
+  };
+
+  //get value
+  const getValue = (currentKey, into, target) => {
+    for (var i in into) {
+      if (into.hasOwnProperty(i)) {
+        let newKey = i;
+        let newVal = into[i];
+
+        if (currentKey.length > 0) {
+          newKey = currentKey + "_" + i;
+        }
+        typeof newVal === "object" ? getValue(newKey, newVal, target) : (target[newKey] = newVal);
+      }
+    }
+  };
+
+  //flatten object
+  const flatten = arr => {
+    let newObj = {};
+    getValue("x", arr, newObj);
+    return newObj;
   };
 
   return (
@@ -62,10 +78,12 @@ const InstagramState = props => {
         photo: state.photo,
         comments: state.comments,
         loading: state.loading,
-
+        getCurrentPhoto,
         getSelf,
         getPhoto,
-        getComments
+
+        flatten,
+        getValue
       }}
     >
       {props.children}

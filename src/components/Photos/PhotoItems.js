@@ -1,11 +1,13 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 const PhotoItems = ({ photo }) => {
   return (
     <Fragment>
       <div className='containers '>
         <div className='content'>
-          <a href='#!' className='modal-trigger'>
+          <Link to={`/photo/${photo.id}`} className='modal-trigger'>
             <div className='content-overlay' />
             <img src={photo.images.standard_resolution.url} alt='' className='content-image' />
             <IconCarousel>
@@ -25,7 +27,7 @@ const PhotoItems = ({ photo }) => {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </Fragment>

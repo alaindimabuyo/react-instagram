@@ -519,3 +519,7 @@ table th {
 .fadeIn-left {
   left: 20%;
 }
+
+.swiper-button-next .swiper-slide {
+  color: white !important;
+}

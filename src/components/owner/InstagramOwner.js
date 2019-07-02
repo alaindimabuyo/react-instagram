@@ -38,9 +38,7 @@ const InstagramOwner = () => {
           </div>
           <div className='row'>
             <div className='col s4 badge-primary'>
-              <span className=''>
-                <h6>Posts: {counts.media}</h6>
-              </span>
+              <h6>Posts: {counts.media}</h6>
             </div>
             <div className='col s4 badge-danger'>
               <h6>Followers: {counts.followed_by}</h6>
