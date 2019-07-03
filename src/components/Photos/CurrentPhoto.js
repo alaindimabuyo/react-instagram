@@ -20,7 +20,7 @@ const CurrentPhoto = ({ match }) => {
   let caption = flatten(photo.caption);
   let carousel = flatten(photo.carousel_media);
   let location = flatten(photo.location);
-  console.log(<location />);
+
   if (loading) {
     return <Prealoader />;
   } else {

@@ -26,20 +26,11 @@ const CoverflowEffect = ({ carousel }) => {
 
   return (
     <Swiper {...params}>
-      <div className='container'>
-        <div className='row'>
-          <div className='col s6'>
-            <div className='swiper-slide'>
-              <img src={carousel.x_0_images_standard_resolution_url} alt='' />
-            </div>
-            <div className='swiper-slide'>
-              <img src={carousel.x_1_images_standard_resolution_url} alt='' />
-            </div>
-            <div className='swiper-slide'>
-              <img src={carousel.x_2_images_standard_resolution_url} alt='' />
-            </div>
-          </div>
-        </div>
+      <div className='swiper-slide'>
+        <img src={carousel.x_0_images_standard_resolution_url} alt='' />
+      </div>
+      <div className='swiper-slide'>
+        <img src={carousel.x_1_images_standard_resolution_url} alt='' />
       </div>
     </Swiper>
   );
