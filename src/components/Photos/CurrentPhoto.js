@@ -18,7 +18,7 @@ const CurrentPhoto = ({ match }) => {
   let image = flatten(photo.images);
   let user = flatten(photo.user);
   let caption = flatten(photo.caption);
-  let carousel = flatten(photo.carousel_media);
+
   let location = flatten(photo.location);
 
   if (loading) {
@@ -27,7 +27,7 @@ const CurrentPhoto = ({ match }) => {
     return (
       <Padding>
         <Fragment>
-          <div className='container'>
+          <div className='container '>
             <div className='row'>
               {photo.caption !== null ? (
                 <Fragment>
@@ -78,19 +78,26 @@ const CurrentPhoto = ({ match }) => {
             </div>
             <div className='row'>
               <div className='col s3' />
-              <div className='col s5 '>
-                {location !== null ? (
-                  <strong className='right bold-text'>{location.x_name}</strong>
-                ) : (
-                  <strong className='badge-primary right badge' />
-                )}
-
-                {photo.type === "carousel" ? (
-                  <SlideImages carousel={carousel} />
-                ) : (
+              {photo.type === "carousel" ? (
+                <div className='col s12'>
+                  {location !== null ? (
+                    <strong className='bold-text'>{location.x_name}</strong>
+                  ) : (
+                    <strong className='badge-primary right badge' />
+                  )}
+                  <SlideImages carousel={photo.carousel_media} />
+                </div>
+              ) : (
+                <div className='col s6 '>
+                  {location !== null ? (
+                    <strong className='right bold-text'>{location.x_name}</strong>
+                  ) : (
+                    <strong className='badge-primary right badge' />
+                  )}
                   <ImageWrap src={image.x_standard_resolution_url} alt='current_photo' />
-                )}
-              </div>
+                </div>
+              )}
+
               <div className='col-s2' />
             </div>
           </div>

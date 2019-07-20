@@ -4,34 +4,28 @@ import Swiper from "react-id-swiper";
 
 const CoverflowEffect = ({ carousel }) => {
   const params = {
-    effect: "cube",
-    loop: true,
-    grabCursor: true,
-    cubeEffect: {
-      shadow: true,
-      slideShadows: true,
-      shadowOffset: 20,
-      shadowScale: 0.94
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
-    },
+    slidesPerView: 3,
+    spaceBetween: 30,
     pagination: {
-      el: ".swiper-pagination"
+      el: ".swiper-pagination",
+      clickable: true
     }
   };
 
-  console.log(carousel);
+  // //map objects
+  // console.log(
+  //   Object.keys(carousel).map((item, i) => {
+  //     return carousel[item].images.standard_resolution.url;
+  //   })
+  // );
 
   return (
     <Swiper {...params}>
-      <div className='swiper-slide'>
-        <img src={carousel.x_0_images_standard_resolution_url} alt='' />
-      </div>
-      <div className='swiper-slide'>
-        <img src={carousel.x_1_images_standard_resolution_url} alt='' />
-      </div>
+      {Object.keys(carousel).map((item, i) => (
+        <div className='swiper-slide' key={i}>
+          <img src={carousel[item].images.standard_resolution.url} alt='' />
+        </div>
+      ))}
     </Swiper>
   );
 };
