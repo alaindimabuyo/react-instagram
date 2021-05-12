@@ -16,7 +16,7 @@
     "react-swipe": "^6.0.4",
     "styled-components": "^4.3.2",
     "swipe-js-iso": "^2.1.5",
-    "swiper": "^4.5.0"
+    "swiper": "^6.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
